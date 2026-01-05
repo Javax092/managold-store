@@ -1,0 +1,109 @@
+/* 1. CONFIGURAÇÕES GERAIS */
+:root {
+    --gold-primary: #f59e0b;
+    --gold-dark: #b45309;
+    --black-deep: #050505;
+}
+
+body {
+    background-color: var(--black-deep);
+    color: #ffffff;
+    font-family: 'Inter', sans-serif; /* Recomendo adicionar esta fonte no head */
+    overflow-x: hidden;
+}
+
+/* 2. TIPOGRAFIA PERSONALIZADA */
+.text-stroke {
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+    color: transparent;
+}
+
+h1, h2, h3 {
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+}
+
+/* 3. EFEITOS DE HEADER E VIDRO */
+.glass-header {
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* 4. ANIMAÇÕES DE BOTÕES E HOVERS */
+.btn-gold {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.btn-gold::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+    );
+    transition: all 0.6s;
+}
+
+.btn-gold:hover::before {
+    left: 100%;
+}
+
+/* 5. CARDS DE PRODUTOS */
+.product-card-img {
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.group:hover .product-card-img {
+    transform: scale(1.08);
+}
+
+/* Estilo para o Badge de Categoria */
+.badge-tech {
+    background: linear-gradient(135deg, var(--gold-dark), var(--gold-primary));
+    box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+}
+
+/* 6. CUSTOM SCROLLBAR (Barra de rolagem personalizada) */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #000;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--gold-primary);
+}
+
+/* 7. EFEITO DE FOCO NO INPUT (NEWSLETTER) */
+input:focus {
+    box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.2);
+}
+
+/* 8. UTILITÁRIOS DE ANIMAÇÃO */
+.fade-in-view {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.8s ease-out;
+}
+
+.fade-in-view.visible {
+    opacity: 1;
+    transform: translateY(0);
+}

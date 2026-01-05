@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Managold | Performance & Oversize</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: {
+                            400: '#fbbf24', 500: '#f59e0b', 600: '#d97706', 700: '#b45309',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        html { scroll-behavior: smooth; }
+        body { background-color: #000; color: white; font-family: 'Inter', sans-serif; }
+        .text-stroke { -webkit-text-stroke: 1px white; color: transparent; }
+    </style>
+</head>
+<body>
+
+    <header class="bg-black/90 backdrop-blur-md border-b border-white/10 sticky top-0 z-50">
+        <div class="bg-gradient-to-r from-gold-700 to-gold-500 py-2 text-center text-[10px] font-black tracking-[0.3em] text-black uppercase">
+            Strength & Style • Managold Official
+        </div>
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex-shrink-0">
+                    <a href="index.html" class="text-3xl font-black tracking-tighter">
+                        <span class="text-white">MANA</span><span class="text-gold-500 italic">GOLD</span>
+                    </a>
+                </div>
+
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="index.html" class="relative group text-white text-xs font-bold tracking-[0.2em] hover:text-gold-500 transition-colors">HOME</a>
+                        <a href="#shop" class="relative group text-white text-xs font-bold tracking-[0.2em] hover:text-gold-500 transition-colors">COLEÇÕES</a>
+                        <a href="#footer" class="relative group text-white text-xs font-bold tracking-[0.2em] hover:text-gold-500 transition-colors">SUPORTE</a>
+                    </div>
+                </div>
+
+                <div class="flex items-center space-x-4 md:space-x-6">
+                    <button class="text-white hover:text-gold-500 transition-transform hover:scale-110">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+                    </button>
+                    
+                    <a href="carrinho.html" class="text-white hover:text-gold-500 transition-transform hover:scale-110 relative">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" /></svg>
+                        <span class="absolute -top-2 -right-2 bg-gold-600 text-black text-[10px] font-bold h-4 w-4 flex items-center justify-center rounded-full">0</span>
+                    </a>
+
+                    <button id="mobile-menu-btn" class="md:hidden text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div id="mobile-menu" class="hidden fixed inset-0 z-[100] bg-black/95 backdrop-blur-xl flex flex-col items-center justify-center space-y-8 text-2xl font-black tracking-tighter">
+        <button id="close-menu" class="absolute top-10 right-10 text-gold-500 text-sm tracking-widest uppercase italic">Fechar [X]</button>
+        <a href="index.html" class="hover:text-gold-500">HOME</a>
+        <a href="#shop" class="hover:text-gold-500">COLEÇÕES</a>
+        <a href="carrinho.html" class="hover:text-gold-500">CARRINHO</a>
+    </div>
+
+    <main>
+        <section class="relative h-[85vh] w-full overflow-hidden bg-black">
+            <div class="absolute inset-0 z-0">
+                <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070" class="h-full w-full object-cover opacity-60">
+                <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/50"></div>
+            </div>
+            <div class="relative z-10 max-w-7xl mx-auto px-4 h-full flex flex-col justify-center" data-aos="fade-right">
+                <span class="text-gold-500 font-bold tracking-[0.4em] text-xs mb-4 uppercase">New Collection 2026</span>
+                <h1 class="text-5xl md:text-8xl font-black leading-none mb-6 uppercase tracking-tighter">
+                    FORJADO NO <br> <span class="text-stroke">TREINO,</span> <br> <span class="text-gold-500">ESTILO</span> NAS RUAS.
+                </h1>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#shop" class="bg-gold-600 hover:bg-gold-500 text-black font-black px-10 py-4 rounded-full text-center tracking-widest transition-all transform hover:scale-105 uppercase text-sm">Comprar Agora</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="shop" class="bg-black py-20 px-4 max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+                <div>
+                    <h2 class="text-gold-500 font-black tracking-widest text-xs uppercase mb-2">Essential Drops</h2>
+                    <h3 class="text-4xl font-bold uppercase tracking-tighter">Destaques</h3>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
+                <div class="group relative" data-aos="fade-up">
+                    <a href="produto.html">
+                        <div class="relative aspect-[3/4] overflow-hidden bg-gray-900">
+                            <img src="https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=1974" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            <span class="absolute top-2 left-2 bg-white text-black text-[8px] md:text-[10px] font-black px-2 py-1 uppercase tracking-tighter">Oversize Fit</span>
+                        </div>
+                    </a>
+                    <div class="mt-4">
+                        <h4 class="text-white font-bold text-[10px] md:text-sm tracking-widest uppercase">Camiseta Boxy Gold</h4>
+                        <p class="text-gold-500 font-mono mt-1 text-sm italic">R$ 149,90</p>
+                    </div>
+                </div>
+                </div>
+        </section>
+    </main>
+
+    <footer id="footer" class="bg-black border-t border-white/10 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                <div class="col-span-1">
+                    <a href="#" class="text-2xl font-black tracking-tighter">
+                        <span class="text-white">MANA</span><span class="text-gold-500 italic">GOLD</span>
+                    </a>
+                    <p class="mt-4 text-gray-500 text-xs leading-relaxed uppercase">Do supino ao lifestyle urbano. A fusão da força com a estética.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold text-xs uppercase tracking-widest mb-6">Suporte</h4>
+                    <ul class="space-y-3 text-[10px] text-gray-500 font-bold uppercase">
+                        <li><a href="#" class="hover:text-gold-500">Rastreio</a></li>
+                        <li><a href="#" class="hover:text-gold-500">Trocas</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-white/5 pt-8 text-center">
+                <p class="text-gray-600 text-[9px] tracking-[0.4em]">© 2026 MANAGOLD CLOTHING</p>
+            </div>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/SEUNUMERO" target="_blank" class="fixed bottom-6 right-6 z-[99] bg-[#25D366] p-4 rounded-full shadow-2xl transition-transform hover:scale-110 active:scale-95 flex items-center justify-center border-2 border-white/10">
+        <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.588-5.946 0-6.556 5.332-11.888 11.888-11.888 3.176 0 6.161 1.237 8.404 3.48s3.481 5.229 3.481 8.405c0 6.556-5.333 11.888-11.888 11.888-2.097 0-4.143-.547-5.947-1.588l-6.163 1.687zm6.548-4.088c1.602.949 3.52 1.45 5.485 1.45 5.856 0 10.621-4.765 10.621-10.621 0-2.839-1.105-5.508-3.112-7.514s-4.675-3.111-7.514-3.111c-5.856 0-10.62 4.765-10.62 10.621 0 1.965.501 3.882 1.45 5.484l-.949 3.466 3.549-.93z"/>
+        </svg>
+    </a>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1000, once: true });
+
+        // Menu Mobile Logic
+        const btn = document.getElementById('mobile-menu-btn');
+        const close = document.getElementById('close-menu');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.onclick = () => { menu.classList.remove('hidden'); document.body.style.overflow = 'hidden'; }
+        close.onclick = () => { menu.classList.add('hidden'); document.body.style.overflow = 'auto'; }
+        
+        // Fechar menu ao clicar em link
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.onclick = () => { menu.classList.add('hidden'); document.body.style.overflow = 'auto'; }
+        });
+    </script>
+</body>
+</html>

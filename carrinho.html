@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sua Sacola | Managold</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        tailwind.config = {
+            theme: { extend: { colors: { gold: { 400: '#fbbf24', 500: '#f59e0b', 600: '#d97706', 700: '#b45309' } } } }
+        }
+    </script>
+</head>
+<body class="bg-black text-white min-h-screen flex flex-col">
+
+    <header class="bg-black/90 backdrop-blur-md border-b border-white/10 sticky top-0 z-50">
+        <div class="bg-gradient-to-r from-gold-700 to-gold-500 py-2 text-center text-[10px] font-black tracking-[0.3em] text-black uppercase">
+            Strength & Style • Managold Official
+        </div>
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex-shrink-0">
+                    <a href="index.html" class="text-3xl font-black tracking-tighter">
+                        <span class="text-white">MANA</span><span class="text-gold-500 italic">GOLD</span>
+                    </a>
+                </div>
+                
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="index.html" class="relative group text-white text-xs font-bold tracking-[0.2em] hover:text-gold-500 transition-colors">HOME</a>
+                        <a href="index.html#shop" class="relative group text-white text-xs font-bold tracking-[0.2em] hover:text-gold-500 transition-colors">SHOP</a>
+                    </div>
+                </div>
+
+                <div class="flex items-center space-x-4 md:space-x-6">
+                    <a href="carrinho.html" class="text-gold-500 relative">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                        </svg>
+                        <span class="absolute -top-2 -right-2 bg-white text-black text-[10px] font-bold h-4 w-4 flex items-center justify-center rounded-full text-center">2</span>
+                    </a>
+                    <button id="mobile-menu-btn" class="md:hidden text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div id="mobile-menu" class="hidden fixed inset-0 z-[100] bg-black/95 backdrop-blur-xl flex flex-col items-center justify-center space-y-8 text-2xl font-black tracking-tighter">
+        <button id="close-menu" class="absolute top-10 right-10 text-gold-500 text-sm tracking-widest uppercase">FECHAR [X]</button>
+        <a href="index.html" class="hover:text-gold-500">HOME</a>
+        <a href="index.html#shop" class="hover:text-gold-500 text-gold-500">COLEÇÕES</a>
+        <a href="carrinho.html" class="hover:text-gold-500">CARRINHO</a>
+    </div>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-16 w-full flex-grow">
+        <h1 class="text-3xl md:text-4xl font-black uppercase tracking-tighter mb-8 md:mb-12">Sua Sacola <span class="text-gold-500 font-mono text-lg ml-2">(2 ITENS)</span></h1>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 md:gap-16">
+            
+            <div class="lg:col-span-2 space-y-8 order-2 lg:order-1">
+                
+                <div class="flex gap-4 md:gap-6 border-b border-white/10 pb-8">
+                    <div class="w-20 h-28 md:w-24 md:h-32 flex-shrink-0 bg-gray-900 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=1974" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex flex-col justify-between w-full">
+                        <div class="flex justify-between items-start gap-2">
+                            <div>
+                                <h3 class="text-white font-bold uppercase text-[10px] md:text-sm tracking-widest leading-tight">Camiseta Boxy Gold Edition</h3>
+                                <p class="text-gray-500 text-[10px] mt-1 uppercase">Tamanho: G</p>
+                            </div>
+                            <button class="text-gray-500 hover:text-red-500 transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="flex justify-between items-end">
+                            <div class="flex items-center border border-white/20 px-2 py-1">
+                                <button class="text-gray-400 hover:text-white px-2">-</button>
+                                <span class="px-3 text-xs font-bold">1</span>
+                                <button class="text-gray-400 hover:text-white px-2">+</button>
+                            </div>
+                            <span class="font-mono text-gold-500 text-sm md:text-base">R$ 149,90</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex gap-4 md:gap-6 border-b border-white/10 pb-8">
+                    <div class="w-20 h-28 md:w-24 md:h-32 flex-shrink-0 bg-gray-900 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=2070" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex flex-col justify-between w-full">
+                        <div class="flex justify-between items-start gap-2">
+                            <div>
+                                <h3 class="text-white font-bold uppercase text-[10px] md:text-sm tracking-widest leading-tight">Shorts de Treino 2 em 1</h3>
+                                <p class="text-gray-500 text-[10px] mt-1 uppercase">Tamanho: M</p>
+                            </div>
+                            <button class="text-gray-500 hover:text-red-500 transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="flex justify-between items-end">
+                            <div class="flex items-center border border-white/20 px-2 py-1">
+                                <button class="text-gray-400 hover:text-white px-2">-</button>
+                                <span class="px-3 text-xs font-bold">1</span>
+                                <button class="text-gray-400 hover:text-white px-2">+</button>
+                            </div>
+                            <span class="font-mono text-gold-500 text-sm md:text-base">R$ 129,90</span>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="index.html" class="inline-block text-[10px] font-bold uppercase tracking-[0.2em] text-gray-500 hover:text-gold-500 transition-colors">
+                    ← Continuar Comprando
+                </a>
+            </div>
+
+            <div class="order-1 lg:order-2">
+                <div class="bg-white/5 p-6 md:p-8 border border-white/10 sticky top-24">
+                    <h2 class="text-sm font-bold uppercase tracking-widest mb-6 pb-4 border-b border-white/10 text-gold-500">Resumo do Pedido</h2>
+                    
+                    <div class="space-y-4 text-xs mb-8">
+                        <div class="flex justify-between">
+                            <span class="text-gray-400 uppercase">Subtotal</span>
+                            <span class="font-mono text-white">R$ 279,80</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-400 uppercase">Frete</span>
+                            <span class="text-green-500 italic font-bold">GRÁTIS</span>
+                        </div>
+                        <div class="pt-4 border-t border-white/10 flex justify-between text-lg font-black italic">
+                            <span class="text-white uppercase">TOTAL</span>
+                            <span class="text-gold-500 font-mono">R$ 279,80</span>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <button class="w-full bg-gold-600 hover:bg-gold-500 text-black font-black py-4 uppercase text-xs tracking-[0.2em] transition-all btn-gold">
+                            Finalizar Compra
+                        </button>
+                        <div class="flex items-center justify-center gap-2 opacity-50">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                            </svg>
+                            <span class="text-[9px] uppercase tracking-tighter">Checkout 100% Seguro</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="bg-black border-t border-white/10 py-8 text-center">
+        <p class="text-[9px] text-gray-600 tracking-[0.3em] uppercase">© 2026 Managold • Estilo & Performance</p>
+    </footer>
+
+    <script>
+        const btn = document.getElementById('mobile-menu-btn');
+        const close = document.getElementById('close-menu');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.onclick = () => menu.classList.remove('hidden');
+        close.onclick = () => menu.classList.add('hidden');
+    </script>
+</body>
+</html>
