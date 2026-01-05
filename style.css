@@ -1,109 +1,184 @@
-/* 1. CONFIGURAÇÕES GERAIS */
+/* ==========================================================================
+   MANAGOLD OFFICIAL STYLESHEET v2.0 - FUTURE TECH
+   ========================================================================== */
+
 :root {
-    --gold-primary: #f59e0b;
-    --gold-dark: #b45309;
-    --black-deep: #050505;
+    --gold: #f59e0b;
+    --gold-glow: rgba(245, 158, 11, 0.5);
+    --black-bg: #000000;
 }
 
-body {
-    background-color: var(--black-deep);
-    color: #ffffff;
-    font-family: 'Inter', sans-serif; /* Recomendo adicionar esta fonte no head */
-    overflow-x: hidden;
+/* 1. GLASS HEADER - Efeito de Vidro Ultra-Fino */
+.glass-header {
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: background 0.3s ease;
 }
 
-/* 2. TIPOGRAFIA PERSONALIZADA */
+/* 2. BOTÃO CYBER (CHANFRADO) - Estética Militar/Futurista */
+.btn-cyber {
+    /* Corte geométrico nas pontas */
+    clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);
+    background: var(--gold);
+    color: black !important;
+    font-weight: 900;
+    padding: 1rem 2.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    font-size: 10px;
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+    display: inline-block;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+}
+
+.btn-cyber:hover {
+    filter: brightness(1.1);
+    box-shadow: 0 0 25px var(--gold-glow);
+    transform: translateY(-2px) scale(1.02);
+}
+
+.btn-cyber:active {
+    transform: translateY(0);
+}
+
+/* 3. SCANNER LASER NOS CARDS - Efeito de Varredura de Sistema */
+.product-card-container {
+    position: relative;
+    overflow: hidden;
+    background: #050505;
+}
+
+.product-card-container::after {
+    content: '';
+    position: absolute;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background: linear-gradient(
+        to bottom, 
+        transparent, 
+        var(--gold-glow), 
+        transparent
+    );
+    z-index: 10;
+    pointer-events: none;
+    will-change: top; /* Otimização de performance */
+}
+
+.product-card-container:hover::after {
+    animation: scanLine 2.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes scanLine {
+    0% { top: -20%; }
+    100% { top: 120%; }
+}
+
+/* 4. CURSOR CUSTOM - Hardware Interface */
+#cursor-dot, 
+#cursor-circle {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    /* Usa a posição via JS com transform para ser fluido */
+}
+
+#cursor-dot { 
+    width: 6px; 
+    height: 6px; 
+    background: var(--gold); 
+}
+
+#cursor-circle { 
+    width: 34px; 
+    height: 34px; 
+    border: 1px solid var(--gold); 
+}
+
+/* Mostra apenas em dispositivos com mouse (evita bugs em touch) */
+@media (pointer: fine) {
+    #cursor-dot, #cursor-circle { opacity: 1; }
+}
+
+/* UTILS */
+.loader-hidden { 
+    opacity: 0; 
+    pointer-events: none; 
+    transition: opacity 0.8s ease-out;
+}
+
 .text-stroke {
     -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
     color: transparent;
 }
 
-h1, h2, h3 {
-    text-transform: uppercase;
-    letter-spacing: -0.02em;
-}
-
-/* 3. EFEITOS DE HEADER E VIDRO */
-.glass-header {
-    background: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-/* 4. ANIMAÇÕES DE BOTÕES E HOVERS */
-.btn-gold {
-    position: relative;
-    overflow: hidden;
-    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-.btn-gold::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        120deg,
-        transparent,
-        rgba(255, 255, 255, 0.3),
-        transparent
-    );
-    transition: all 0.6s;
-}
-
-.btn-gold:hover::before {
-    left: 100%;
-}
-
-/* 5. CARDS DE PRODUTOS */
-.product-card-img {
-    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.group:hover .product-card-img {
-    transform: scale(1.08);
-}
-
-/* Estilo para o Badge de Categoria */
-.badge-tech {
-    background: linear-gradient(135deg, var(--gold-dark), var(--gold-primary));
-    box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
-}
-
-/* 6. CUSTOM SCROLLBAR (Barra de rolagem personalizada) */
+/* Scrollbar Customizada Managold */
 ::-webkit-scrollbar {
-    width: 8px;
+    width: 6px;
 }
-
 ::-webkit-scrollbar-track {
     background: #000;
 }
-
 ::-webkit-scrollbar-thumb {
-    background: #333;
+    background: #222;
     border-radius: 10px;
 }
-
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--gold-primary);
+    background: var(--gold);
+}
+/* NOTIFICAÇÃO TOAST MANAGOLD */
+.toast-container {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    background: rgba(0, 0, 0, 0.9);
+    border: 1px solid var(--gold);
+    color: white;
+    padding: 15px 25px;
+    z-index: 10001;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    animation: toastEnter 0.5s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+    clip-path: polygon(0 0, 100% 0, 100% 70%, 92% 100%, 0 100%);
 }
 
-/* 7. EFEITO DE FOCO NO INPUT (NEWSLETTER) */
-input:focus {
-    box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.2);
+.toast-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    background: var(--gold);
+    width: 100%;
+    animation: toastProgress 3s linear forwards;
 }
 
-/* 8. UTILITÁRIOS DE ANIMAÇÃO */
-.fade-in-view {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.8s ease-out;
+@keyframes toastEnter {
+    from { opacity: 0; transform: translateX(-50px); }
+    to { opacity: 1; transform: translateX(0); }
 }
 
-.fade-in-view.visible {
-    opacity: 1;
-    transform: translateY(0);
+@keyframes toastExit {
+    from { opacity: 1; transform: translateX(0); }
+    to { opacity: 0; transform: translateX(-50px); }
+}
+
+@keyframes toastProgress {
+    from { width: 100%; }
+    to { width: 0%; }
+}
+
+.toast-exit {
+    animation: toastExit 0.5s cubic-bezier(0.23, 1, 0.32, 1) forwards;
 }

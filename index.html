@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Managold | Performance & Oversize</title>
+    <title>Managold | Engenharia de Performance Humana</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
@@ -14,9 +14,7 @@
             theme: {
                 extend: {
                     colors: {
-                        gold: {
-                            400: '#fbbf24', 500: '#f59e0b', 600: '#d97706', 700: '#b45309',
-                        }
+                        gold: { 400: '#fbbf24', 500: '#f59e0b', 600: '#d97706', 700: '#b45309' }
                     }
                 }
             }
@@ -25,144 +23,156 @@
     <link rel="stylesheet" href="style.css">
     <style>
         html { scroll-behavior: smooth; }
-        body { background-color: #000; color: white; font-family: 'Inter', sans-serif; }
+        body { background-color: #000; color: white; font-family: 'Inter', sans-serif; cursor: default !important; }
         .text-stroke { -webkit-text-stroke: 1px white; color: transparent; }
+        .glass-header { background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
     </style>
 </head>
-<body>
+<body class="bg-black text-white overflow-x-hidden">
 
-    <header class="bg-black/90 backdrop-blur-md border-b border-white/10 sticky top-0 z-50">
-        <div class="bg-gradient-to-r from-gold-700 to-gold-500 py-2 text-center text-[10px] font-black tracking-[0.3em] text-black uppercase">
-            Strength & Style • Managold Official
+    <div class="fixed inset-0 -z-10 pointer-events-none">
+        <div class="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-gold-600/10 blur-[120px] rounded-full animate-pulse"></div>
+        <div class="absolute bottom-[10%] right-[0%] w-[400px] h-[400px] bg-gold-900/10 blur-[100px] rounded-full"></div>
+    </div>
+
+    <div id="preloader" class="fixed inset-0 z-[200] bg-black flex flex-col items-center justify-center transition-opacity duration-1000">
+        <div class="relative text-center">
+            <div class="text-4xl md:text-6xl font-black tracking-tighter mb-4 animate-pulse">
+                <span class="text-white">MANA</span><span class="text-gold-500 italic">GOLD</span>
+            </div>
+            <div class="w-48 h-[1px] bg-white/10 mx-auto relative overflow-hidden">
+                <div id="progress-bar" class="absolute top-0 left-0 h-full bg-gold-500 w-0 transition-all duration-300"></div>
+            </div>
+            <p class="mt-4 font-mono text-[8px] text-gold-500/50 tracking-[0.4em] uppercase">Inicializando Sistema... <span id="percent">0%</span></p>
         </div>
-        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-20">
-                <div class="flex-shrink-0">
-                    <a href="index.html" class="text-3xl font-black tracking-tighter">
-                        <span class="text-white">MANA</span><span class="text-gold-500 italic">GOLD</span>
-                    </a>
-                </div>
+    </div>
 
-                <div class="hidden md:block">
-                    <div class="ml-10 flex items-baseline space-x-8">
-                        <a href="index.html" class="relative group text-white text-xs font-bold tracking-[0.2em] hover:text-gold-500 transition-colors">HOME</a>
-                        <a href="#shop" class="relative group text-white text-xs font-bold tracking-[0.2em] hover:text-gold-500 transition-colors">COLEÇÕES</a>
-                        <a href="#footer" class="relative group text-white text-xs font-bold tracking-[0.2em] hover:text-gold-500 transition-colors">SUPORTE</a>
-                    </div>
-                </div>
+    <header class="glass-header sticky top-0 z-50">
+        <div class="bg-gold-600 py-1.5 text-center text-[9px] font-black tracking-[0.3em] text-black uppercase">
+            Managold Envio para todo o Brasil
+        </div>
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="index.html" class="text-3xl font-black tracking-tighter">
+                <span class="text-white">MANA</span><span class="text-gold-500 italic">GOLD</span>
+            </a>
+            
+            <div class="hidden md:flex space-x-10">
+                <a href="#shop" class="text-[10px] font-bold tracking-[0.2em] hover:text-gold-500 transition-colors uppercase">Coleções</a>
+                <a href="#tech" class="text-[10px] font-bold tracking-[0.2em] hover:text-gold-500 transition-colors uppercase">Tecnologia</a>
+                <a href="#footer" class="text-[10px] font-bold tracking-[0.2em] hover:text-gold-500 transition-colors uppercase">Suporte</a>
+            </div>
 
-                <div class="flex items-center space-x-4 md:space-x-6">
-                    <button class="text-white hover:text-gold-500 transition-transform hover:scale-110">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
-                    </button>
-                    
-                    <a href="carrinho.html" class="text-white hover:text-gold-500 transition-transform hover:scale-110 relative">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" /></svg>
-                        <span class="absolute -top-2 -right-2 bg-gold-600 text-black text-[10px] font-bold h-4 w-4 flex items-center justify-center rounded-full">0</span>
-                    </a>
-
-                    <button id="mobile-menu-btn" class="md:hidden text-white">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
-                    </button>
-                </div>
+            <div class="flex items-center space-x-6">
+                <a href="carrinho.html" class="relative group transition-transform hover:scale-110">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" /></svg>
+                    <span id="cart-count-badge" class="absolute -top-2 -right-2 bg-gold-600 text-black text-[9px] font-bold h-4 w-4 flex items-center justify-center rounded-full">0</span>
+                </a>
+                <button id="mobile-menu-btn" class="md:hidden text-white"><svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M4 6h16M4 12h16m-7 6h7" stroke-width="2"/></svg></button>
             </div>
         </nav>
     </header>
 
-    <div id="mobile-menu" class="hidden fixed inset-0 z-[100] bg-black/95 backdrop-blur-xl flex flex-col items-center justify-center space-y-8 text-2xl font-black tracking-tighter">
+    <div id="mobile-menu" class="hidden fixed inset-0 z-[100] bg-black/98 backdrop-blur-2xl flex flex-col items-center justify-center space-y-10 text-3xl font-black uppercase">
         <button id="close-menu" class="absolute top-10 right-10 text-gold-500 text-sm tracking-widest uppercase italic">Fechar [X]</button>
-        <a href="index.html" class="hover:text-gold-500">HOME</a>
-        <a href="#shop" class="hover:text-gold-500">COLEÇÕES</a>
-        <a href="carrinho.html" class="hover:text-gold-500">CARRINHO</a>
+        <a href="index.html">Início</a>
+        <a href="#shop" class="text-gold-500">Loja</a>
+        <a href="carrinho.html">Carrinho</a>
     </div>
 
     <main>
-        <section class="relative h-[85vh] w-full overflow-hidden bg-black">
+        <section class="relative h-[90vh] flex items-center overflow-hidden">
             <div class="absolute inset-0 z-0">
-                <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070" class="h-full w-full object-cover opacity-60">
-                <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/50"></div>
+                <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070" class="w-full h-full object-cover opacity-50 grayscale hover:grayscale-0 transition-all duration-1000">
+                <div class="absolute inset-0 bg-gradient-to-r from-black via-black/40 to-transparent"></div>
             </div>
-            <div class="relative z-10 max-w-7xl mx-auto px-4 h-full flex flex-col justify-center" data-aos="fade-right">
-                <span class="text-gold-500 font-bold tracking-[0.4em] text-xs mb-4 uppercase">New Collection 2026</span>
-                <h1 class="text-5xl md:text-8xl font-black leading-none mb-6 uppercase tracking-tighter">
-                    FORJADO NO <br> <span class="text-stroke">TREINO,</span> <br> <span class="text-gold-500">ESTILO</span> NAS RUAS.
+            <div class="relative z-10 max-w-7xl mx-auto px-4" data-aos="fade-right">
+                <h1 class="text-6xl md:text-9xl font-black uppercase leading-[0.8] mb-8 tracking-tighter">
+                    Projetado <br> <span class="text-stroke">Para a</span> <br> <span class="text-gold-500">Elite.</span>
                 </h1>
-                <div class="flex flex-col sm:flex-row gap-4">
-                    <a href="#shop" class="bg-gold-600 hover:bg-gold-500 text-black font-black px-10 py-4 rounded-full text-center tracking-widest transition-all transform hover:scale-105 uppercase text-sm">Comprar Agora</a>
-                </div>
+                <p class="text-gray-400 font-bold tracking-[0.2em] text-xs mb-8 uppercase">O estilo que você deseja</p>
+                <a href="#shop" class="btn-cyber">Acessar Coleção</a>
             </div>
         </section>
 
-        <section id="shop" class="bg-black py-20 px-4 max-w-7xl mx-auto">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
-                <div>
-                    <h2 class="text-gold-500 font-black tracking-widest text-xs uppercase mb-2">Essential Drops</h2>
-                    <h3 class="text-4xl font-bold uppercase tracking-tighter">Destaques</h3>
-                </div>
+        <section id="shop" class="py-32 px-4 max-w-7xl mx-auto">
+            <div class="mb-20" data-aos="fade-up">
+                <p class="text-gold-500 font-bold tracking-[0.5em] text-[10px] uppercase mb-4">/Itens_Disponíveis</p>
+                <h2 class="text-5xl font-black uppercase tracking-tighter italic">Lançamentos</h2>
             </div>
 
-            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
-                <div class="group relative" data-aos="fade-up">
-                    <a href="produto.html">
-                        <div class="relative aspect-[3/4] overflow-hidden bg-gray-900">
-                            <img src="https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=1974" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110">
-                            <span class="absolute top-2 left-2 bg-white text-black text-[8px] md:text-[10px] font-black px-2 py-1 uppercase tracking-tighter">Oversize Fit</span>
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-10">
+                <script>
+                    const products = [
+                        { id: 101, name: "Oversize Boxy Gold", price: "149,90", tag: "Oversize", img: "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a" },
+                        { id: 102, name: "Tech-Poly Tank", price: "89,90", tag: "Performance", img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518" },
+                        { id: 103, name: "Cyber Shorts 2-em-1", price: "129,90", tag: "Techwear", img: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438" },
+                        { id: 104, name: "Oversize Heavy Ghost", price: "159,90", tag: "Oversize", img: "https://images.unsplash.com/photo-1576566588028-4147f3842f27" }
+                    ];
+                    
+                    document.write(products.map(p => `
+                        <div class="group relative product-card-container" data-aos="fade-up">
+                            <a href="produto.html">
+                                <div class="aspect-[3/4] overflow-hidden bg-gray-900 border border-white/5">
+                                    <img src="${p.img}?q=80&w=1000" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale hover:grayscale-0">
+                                    <span class="absolute top-3 left-3 bg-gold-600 text-black text-[8px] font-black px-2 py-0.5 uppercase tracking-tighter">${p.tag}</span>
+                                </div>
+                                <div class="mt-6">
+                                    <h4 class="text-white font-bold text-[10px] md:text-xs tracking-widest uppercase">${p.name}</h4>
+                                    <p class="text-gold-500 font-mono mt-1 text-sm italic font-bold">R$ ${p.price}</p>
+                                </div>
+                            </a>
                         </div>
-                    </a>
-                    <div class="mt-4">
-                        <h4 class="text-white font-bold text-[10px] md:text-sm tracking-widest uppercase">Camiseta Boxy Gold</h4>
-                        <p class="text-gold-500 font-mono mt-1 text-sm italic">R$ 149,90</p>
+                    `).join(''));
+                </script>
+            </div>
+        </section>
+
+        <section id="tech" class="py-32 bg-zinc-950 border-y border-white/5">
+            <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-16">
+                <div class="text-center" data-aos="zoom-in">
+                    <div class="w-16 h-16 bg-gold-600/10 rounded-full flex items-center justify-center mx-auto mb-6 border border-gold-500/20">
+                        <svg class="w-8 h-8 text-gold-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-width="2"/></svg>
                     </div>
+                    <h5 class="font-black uppercase tracking-widest text-sm mb-4">Aero-Compressão</h5>
+                    <p class="text-gray-500 text-xs leading-relaxed uppercase tracking-tighter">Microfibras de alta densidade que otimizam a circulação sanguínea durante o esforço extremo.</p>
                 </div>
+                <div class="text-center" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="w-16 h-16 bg-gold-600/10 rounded-full flex items-center justify-center mx-auto mb-6 border border-gold-500/20">
+                        <svg class="w-8 h-8 text-gold-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-width="2"/></svg>
+                    </div>
+                    <h5 class="font-black uppercase tracking-widest text-sm mb-4">Fusão Dry-Tech</h5>
+                    <p class="text-gray-500 text-xs leading-relaxed uppercase tracking-tighter">Evaporação acelerada de umidade através de poros moleculares termo-ativos.</p>
                 </div>
+                <div class="text-center" data-aos="zoom-in" data-aos-delay="400">
+                    <div class="w-16 h-16 bg-gold-600/10 rounded-full flex items-center justify-center mx-auto mb-6 border border-gold-500/20">
+                        <svg class="w-8 h-8 text-gold-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" stroke-width="2"/></svg>
+                    </div>
+                    <h5 class="font-black uppercase tracking-widest text-sm mb-4">Algodão Heavy Armour</h5>
+                    <p class="text-gray-500 text-xs leading-relaxed uppercase tracking-tighter">Fibras de 300g com memória de forma, mantendo o corte perfeito após infinitas lavagens.</p>
+                </div>
+            </div>
         </section>
     </main>
 
-    <footer id="footer" class="bg-black border-t border-white/10 pt-16 pb-8">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
-                <div class="col-span-1">
-                    <a href="#" class="text-2xl font-black tracking-tighter">
-                        <span class="text-white">MANA</span><span class="text-gold-500 italic">GOLD</span>
-                    </a>
-                    <p class="mt-4 text-gray-500 text-xs leading-relaxed uppercase">Do supino ao lifestyle urbano. A fusão da força com a estética.</p>
-                </div>
-                <div>
-                    <h4 class="text-white font-bold text-xs uppercase tracking-widest mb-6">Suporte</h4>
-                    <ul class="space-y-3 text-[10px] text-gray-500 font-bold uppercase">
-                        <li><a href="#" class="hover:text-gold-500">Rastreio</a></li>
-                        <li><a href="#" class="hover:text-gold-500">Trocas</a></li>
-                    </ul>
-                </div>
+    <footer id="footer" class="bg-black py-20 px-4 border-t border-white/5">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-10 text-center md:text-left">
+            <div>
+                <a href="#" class="text-3xl font-black uppercase tracking-tighter italic">Mana<span class="text-gold-500">gold</span></a>
+                <p class="text-gray-600 text-[9px] mt-4 uppercase tracking-[0.3em]">Construído para o futuro do movimento humano.</p>
             </div>
-            <div class="border-t border-white/5 pt-8 text-center">
-                <p class="text-gray-600 text-[9px] tracking-[0.4em]">© 2026 MANAGOLD CLOTHING</p>
+            <div class="flex space-x-8 text-[10px] font-bold uppercase tracking-widest text-gray-500">
+                <a href="#" class="hover:text-gold-500 transition-colors">Instagram</a>
+                <a href="#" class="hover:text-gold-500 transition-colors">Privacidade</a>
+                <a href="https://wa.me/5511999999999" class="hover:text-gold-500 transition-colors text-white">Contato</a>
             </div>
         </div>
     </footer>
 
-    <a href="https://wa.me/SEUNUMERO" target="_blank" class="fixed bottom-6 right-6 z-[99] bg-[#25D366] p-4 rounded-full shadow-2xl transition-transform hover:scale-110 active:scale-95 flex items-center justify-center border-2 border-white/10">
-        <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.588-5.946 0-6.556 5.332-11.888 11.888-11.888 3.176 0 6.161 1.237 8.404 3.48s3.481 5.229 3.481 8.405c0 6.556-5.333 11.888-11.888 11.888-2.097 0-4.143-.547-5.947-1.588l-6.163 1.687zm6.548-4.088c1.602.949 3.52 1.45 5.485 1.45 5.856 0 10.621-4.765 10.621-10.621 0-2.839-1.105-5.508-3.112-7.514s-4.675-3.111-7.514-3.111c-5.856 0-10.62 4.765-10.62 10.621 0 1.965.501 3.882 1.45 5.484l-.949 3.466 3.549-.93z"/>
-        </svg>
+    <a href="https://wa.me/5511999999999" target="_blank" class="fixed bottom-8 right-8 z-[90] bg-gold-500 text-black p-4 rounded-none border border-white/20 shadow-[0_0_20px_rgba(245,158,11,0.3)] hover:scale-110 transition-transform">
+        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.414 0 .006 5.408.006 12.037c0 2.115.554 4.18 1.605 5.996L0 24l6.15-1.613a11.803 11.803 0 005.895 1.564h.005c6.635 0 12.043-5.408 12.043-12.04c0-3.21-1.248-6.227-3.513-8.495z"/></svg>
     </a>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        AOS.init({ duration: 1000, once: true });
-
-        // Menu Mobile Logic
-        const btn = document.getElementById('mobile-menu-btn');
-        const close = document.getElementById('close-menu');
-        const menu = document.getElementById('mobile-menu');
-
-        btn.onclick = () => { menu.classList.remove('hidden'); document.body.style.overflow = 'hidden'; }
-        close.onclick = () => { menu.classList.add('hidden'); document.body.style.overflow = 'auto'; }
-        
-        // Fechar menu ao clicar em link
-        document.querySelectorAll('#mobile-menu a').forEach(link => {
-            link.onclick = () => { menu.classList.add('hidden'); document.body.style.overflow = 'auto'; }
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
