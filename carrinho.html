@@ -6,186 +6,217 @@
     <title>Sua Sacola | Managold</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
     <script>
         tailwind.config = {
             theme: { extend: { colors: { gold: { 400: '#fbbf24', 500: '#f59e0b', 600: '#d97706', 700: '#b45309' } } } }
         }
     </script>
-</head>
-<body class="bg-black text-white min-h-screen flex flex-col font-['Inter'] overflow-x-hidden">
+    <style>
+        body { background-color: #000; color: white; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        .glass-header { background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+        
+        .btn-cyber {
+            background: #f59e0b;
+            color: black;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            padding: 1.2rem;
+            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+            display: block;
+            width: 100%;
+            text-align: center;
+            clip-path: polygon(95% 0, 100% 25%, 100% 100%, 5% 100%, 0 75%, 0 0);
+        }
+        .btn-cyber:hover { background: white; transform: translateY(-2px); box-shadow: 0 10px 20px rgba(245, 158, 11, 0.2); }
+        
+        input, select { border-radius: 0 !important; transition: all 0.3s; background: black; border: 1px solid rgba(255,255,255,0.1); color: white; }
+        input:focus, select:focus { border-color: #f59e0b !important; outline: none; }
+        
+        .item-row { transition: all 0.4s ease; }
+        .item-row.removing { opacity: 0; transform: translateX(30px); }
 
-    <div id="cursor-dot"></div>
-    <div id="cursor-circle"></div>
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-thumb { background: #f59e0b; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
     <div class="fixed inset-0 -z-10 pointer-events-none">
-        <div class="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-gold-600/10 blur-[120px] rounded-full animate-pulse"></div>
+        <div class="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-gold-600/5 blur-[120px] rounded-full"></div>
     </div>
 
     <header class="glass-header sticky top-0 z-50">
         <div class="bg-gold-600 py-1.5 text-center text-[9px] font-black tracking-[0.3em] text-black uppercase">
-            Protocolo de Segurança Ativo • Managold Pay
+            Finalize seu pedido via WhatsApp • Managold
         </div>
         <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
             <a href="index.html" class="text-3xl font-black tracking-tighter">
                 <span class="text-white">MANA</span><span class="text-gold-500 italic">GOLD</span>
             </a>
             <div class="flex items-center space-x-6">
-                <a href="index.html" class="text-[10px] font-bold tracking-widest hover:text-gold-500 uppercase">Voltar ao Shop</a>
+                <a href="index.html" class="text-[10px] font-bold tracking-widest hover:text-gold-500 uppercase transition-colors border-b border-white/10 pb-1">Continuar Comprando</a>
             </div>
         </nav>
     </header>
 
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-16 w-full flex-grow">
-        <h1 class="text-3xl md:text-4xl font-black uppercase tracking-tighter mb-8 md:mb-12">Sua Sacola <span id="cart-count-title" class="text-gold-500 font-mono text-lg ml-2">(2 ITENS)</span></h1>
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 md:mb-16 gap-4">
+            <h1 class="text-3xl md:text-5xl font-black uppercase tracking-tighter italic">
+                Sua <span class="text-gold-500">Sacola</span> <span id="cart-count-title" class="text-gray-600 font-mono text-lg ml-2 not-italic">(0)</span>
+            </h1>
+            <button onclick="clearCart()" class="text-[9px] font-black uppercase tracking-[0.2em] text-red-500/50 hover:text-red-500 transition-colors border-b border-red-500/20 hover:border-red-500 pb-1 w-fit">
+                [ Limpar Sacola Completa ]
+            </button>
+        </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 md:gap-16">
-            
-            <div id="cart-items-container" class="lg:col-span-2 space-y-8 order-2 lg:order-1">
-                </div>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 md:gap-20">
+            <div id="cart-items-container" class="lg:col-span-2 space-y-10 order-2 lg:order-1"></div>
 
             <div class="order-1 lg:order-2">
-                <div class="bg-white/5 p-6 md:p-8 border border-white/10 sticky top-24">
-                    <h2 class="text-sm font-bold uppercase tracking-widest mb-6 pb-4 border-b border-white/10 text-gold-500">Resumo do Pedido</h2>
+                <div class="bg-zinc-950 p-6 md:p-10 border border-white/5 sticky top-32 shadow-2xl">
+                    <h2 class="text-xs font-black uppercase tracking-[0.3em] mb-8 pb-4 border-b border-white/10 text-gold-500">Resumo da Ordem</h2>
                     
-                    <div class="space-y-4 text-xs mb-8">
-                        <div class="flex justify-between">
-                            <span class="text-gray-400 uppercase">Subtotal</span>
-                            <span id="subtotal-val" class="font-mono text-white">R$ 0,00</span>
+                    <div class="space-y-4 mb-10">
+                        <div class="flex justify-between text-[10px] uppercase tracking-widest text-gray-400">
+                            <span>Subtotal</span>
+                            <span id="subtotal-value" class="text-white">R$ 0,00</span>
                         </div>
-                        <div class="flex justify-between">
-                            <span class="text-gray-400 uppercase">Frete</span>
-                            <span class="text-green-500 italic font-bold">GRÁTIS</span>
+                        <div class="flex justify-between text-[10px] uppercase tracking-widest text-gray-400">
+                            <span>Logística</span>
+                            <span class="text-green-500 font-bold">Grátis</span>
                         </div>
-                        <div class="pt-4 border-t border-white/10 flex justify-between text-lg font-black italic">
-                            <span class="text-white uppercase">TOTAL</span>
-                            <span id="total-val" class="text-gold-500 font-mono">R$ 0,00</span>
+                        <div class="flex justify-between text-xl font-black uppercase tracking-tighter pt-6 border-t border-white/10">
+                            <span>Total</span>
+                            <span id="total-value" class="text-gold-500 font-mono">R$ 0,00</span>
                         </div>
                     </div>
 
-                    <button onclick="openPaymentModal()" class="w-full btn-cyber py-5">
-                        Finalizar Compra
-                    </button>
+                    <div class="space-y-4 mb-8">
+                        <p class="text-[9px] font-bold text-gray-500 uppercase tracking-widest mb-2">Dados para Entrega</p>
+                        <input type="text" id="cust-name" placeholder="NOME COMPLETO" class="w-full p-4 text-[10px] tracking-widest uppercase font-bold">
+                        <input type="text" id="cust-zip" placeholder="CEP" class="w-full p-4 text-[10px] tracking-widest uppercase font-bold">
+                    </div>
+
+                    <button onclick="sendWhatsApp()" class="btn-cyber">Finalizar via WhatsApp</button>
                     
-                    <div class="flex items-center justify-center gap-2 mt-4 opacity-50">
-                        <svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" stroke-width="2"/></svg>
-                        <span class="text-[9px] uppercase tracking-tighter">Criptografia SSL de 256 bits</span>
+                    <div class="mt-6 flex items-center justify-center space-x-4 opacity-30 grayscale invert">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Mastercard_2019_logo.svg" class="h-4" alt="Mastercard">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" class="h-2" alt="Visa">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/a/aa/Pix_logo.svg" class="h-3" alt="Pix">
                     </div>
                 </div>
             </div>
         </div>
     </main>
 
-    <div id="payment-modal" class="fixed inset-0 z-[200] bg-black/90 backdrop-blur-xl hidden flex items-center justify-center p-4">
-        <div class="bg-zinc-900 border border-gold-500/30 p-8 max-w-md w-full text-center relative product-card-container">
-            <button onclick="closePaymentModal()" class="absolute top-4 right-4 text-zinc-500 hover:text-white uppercase text-[10px] font-bold">Fechar [X]</button>
-            
-            <h3 class="text-xl font-black uppercase tracking-tighter mb-2">Aguardando Pagamento</h3>
-            <p class="text-gold-500 font-mono text-sm mb-6 uppercase tracking-widest animate-pulse">// Link_Gerado_v2.0</p>
-            
-            <div class="bg-white p-4 inline-block mb-6 rounded-sm">
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=Managold_Payment_Sim" alt="QR Code" class="w-40 h-40">
-            </div>
-
-            <div class="space-y-4 text-left">
-                <div class="bg-black/50 p-4 border border-white/5">
-                    <p class="text-[10px] text-zinc-500 uppercase mb-1">Código PIX (Copia e Cola)</p>
-                    <code class="text-[10px] text-white break-all block">00020126580014BR.GOV.BCB.PIX0136managold-pay-simulado-12345-v2-0</code>
-                </div>
-                <button class="w-full bg-white text-black font-black py-3 text-[10px] uppercase tracking-widest hover:bg-gold-500 transition-colors">Copiar Código</button>
-            </div>
-        </div>
-    </div>
-
-    <footer class="bg-black border-t border-white/10 py-8 text-center">
-        <p class="text-[9px] text-gray-600 tracking-[0.4em] uppercase">© 2026 Managold • Sistema de Pagamento Homologado</p>
-    </footer>
-
     <script>
-        // ESTADO DO CARRINHO
-        let cart = [
-            { id: 1, name: "Camiseta Boxy Gold Edition", size: "G", price: 149.90, qty: 1, img: "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a" },
-            { id: 2, name: "Shorts de Treino 2 em 1", size: "M", price: 129.90, qty: 1, img: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438" }
-        ];
-
         function renderCart() {
+            const cart = JSON.parse(localStorage.getItem('managold_cart')) || [];
             const container = document.getElementById('cart-items-container');
-            const subtotalEl = document.getElementById('subtotal-val');
-            const totalEl = document.getElementById('total-val');
             const countTitle = document.getElementById('cart-count-title');
+            const subtotalEl = document.getElementById('subtotal-value');
+            const totalEl = document.getElementById('total-value');
             
-            container.innerHTML = "";
-            let subtotal = 0;
-
             if (cart.length === 0) {
-                container.innerHTML = "<p class='text-zinc-500 uppercase tracking-widest text-sm py-10'>Sua sacola está vazia.</p>";
+                container.innerHTML = `
+                    <div class="text-center py-32 border border-white/5 bg-zinc-950/50">
+                        <p class="text-gray-600 uppercase tracking-[0.5em] text-[10px] mb-8">Sua sacola está vazia</p>
+                        <a href="index.html" class="btn-cyber inline-block px-10 py-4 !w-auto">Explorar Coleção</a>
+                    </div>
+                `;
+                countTitle.innerText = "(0)";
+                subtotalEl.innerText = "R$ 0,00";
+                totalEl.innerText = "R$ 0,00";
+                return;
             }
 
-            cart.forEach(item => {
-                subtotal += item.price * item.qty;
-                container.innerHTML += `
-                    <div class="flex gap-4 md:gap-6 border-b border-white/10 pb-8">
-                        <div class="w-20 h-28 md:w-24 md:h-32 flex-shrink-0 bg-gray-900 overflow-hidden">
-                            <img src="${item.img}?q=80&w=400" class="w-full h-full object-cover">
+            let total = 0;
+            container.innerHTML = cart.map((item, index) => {
+                const priceValue = parseFloat(item.price.replace(',', '.'));
+                total += priceValue;
+
+                return `
+                    <div id="item-${index}" class="item-row flex flex-col sm:flex-row items-center gap-8 pb-10 border-b border-white/5 group relative">
+                        <div class="w-32 h-44 bg-zinc-900 overflow-hidden border border-white/10 relative">
+                            <img src="${item.img}" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700">
                         </div>
-                        <div class="flex flex-col justify-between w-full">
-                            <div class="flex justify-between items-start gap-2">
+                        <div class="flex-1 text-center sm:text-left">
+                            <div class="flex justify-between items-start">
                                 <div>
-                                    <h3 class="text-white font-bold uppercase text-[10px] md:text-sm tracking-widest leading-tight">${item.name}</h3>
-                                    <p class="text-gray-500 text-[10px] mt-1 uppercase">Tamanho: ${item.size}</p>
+                                    <p class="text-gold-500 text-[9px] font-black tracking-widest mb-1 uppercase">${item.tag || 'Performance'}</p>
+                                    <h3 class="text-lg font-black uppercase tracking-tighter mb-1">${item.name}</h3>
+                                    <p class="text-[10px] text-zinc-500 font-bold uppercase tracking-widest">Tamanho: ${item.size || 'N/A'}</p>
                                 </div>
-                                <button onclick="removeItem(${item.id})" class="text-gray-500 hover:text-red-500 transition-colors">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                <button onclick="removeItem(${index})" class="text-gray-600 hover:text-red-500 transition-colors p-2" title="Remover Item">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                     </svg>
                                 </button>
                             </div>
-                            <div class="flex justify-between items-end">
-                                <div class="flex items-center border border-white/20 px-2 py-1">
-                                    <button onclick="changeQty(${item.id}, -1)" class="text-gray-400 hover:text-white px-2">-</button>
-                                    <span class="px-3 text-xs font-bold font-mono">${item.qty}</span>
-                                    <button onclick="changeQty(${item.id}, 1)" class="text-gray-400 hover:text-white px-2">+</button>
-                                </div>
-                                <span class="font-mono text-gold-500 text-sm md:text-base">R$ ${(item.price * item.qty).toFixed(2).replace('.', ',')}</span>
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between mt-6">
+                                <p class="text-white font-mono text-xl font-black italic">R$ ${item.price}</p>
                             </div>
                         </div>
                     </div>
                 `;
-            });
+            }).join('');
 
-            subtotalEl.innerText = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
-            totalEl.innerText = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
-            countTitle.innerText = `(${cart.reduce((acc, i) => acc + i.qty, 0)} ITENS)`;
+            countTitle.innerText = `(${cart.length})`;
+            const formattedTotal = total.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            subtotalEl.innerText = `R$ ${formattedTotal}`;
+            totalEl.innerText = `R$ ${formattedTotal}`;
         }
 
-        function changeQty(id, delta) {
-            const item = cart.find(i => i.id === id);
-            if (item) {
-                item.qty += delta;
-                if (item.qty < 1) item.qty = 1;
+        function removeItem(index) {
+            const element = document.getElementById(`item-${index}`);
+            element.classList.add('removing');
+            
+            setTimeout(() => {
+                let cart = JSON.parse(localStorage.getItem('managold_cart')) || [];
+                cart.splice(index, 1);
+                localStorage.setItem('managold_cart', JSON.stringify(cart));
+                renderCart();
+            }, 400);
+        }
+
+        function clearCart() {
+            if(confirm("Deseja realmente esvaziar sua sacola?")) {
+                localStorage.setItem('managold_cart', JSON.stringify([]));
                 renderCart();
             }
         }
 
-        function removeItem(id) {
-            cart = cart.filter(i => i.id !== id);
-            renderCart();
+        function sendWhatsApp() {
+            const cart = JSON.parse(localStorage.getItem('managold_cart')) || [];
+            const name = document.getElementById('cust-name').value;
+            const zip = document.getElementById('cust-zip').value;
+
+            if(!name || !zip || cart.length === 0) {
+                alert("Preencha seus dados e verifique se há itens na sacola.");
+                return;
+            }
+            
+            let message = `*NOVO PEDIDO MANAGOLD*\n`;
+            message += `----------------------------\n`;
+            message += `*Cliente:* ${name.toUpperCase()}\n`;
+            message += `*CEP:* ${zip}\n\n`;
+            message += `*ITENS DO PEDIDO:*\n`;
+            
+            cart.forEach((item, i) => {
+                message += `${i+1}. ${item.name} - ${item.size} (R$ ${item.price})\n`;
+            });
+            
+            const total = document.getElementById('total-value').innerText;
+            message += `\n*TOTAL:* ${total}\n`;
+            message += `----------------------------\n`;
+            message += `Aguardando confirmação de disponibilidade.`;
+            
+            window.open(`https://wa.me/5592986202729?text=${encodeURIComponent(message)}`);
         }
 
-        // MODAL PAGAMENTO
-        function openPaymentModal() {
-            if(cart.length === 0) return alert("Sua sacola está vazia!");
-            document.getElementById('payment-modal').classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closePaymentModal() {
-            document.getElementById('payment-modal').classList.add('hidden');
-            document.body.style.overflow = 'auto';
-        }
-
-        // Inicia a renderização
-        renderCart();
+        // Executa ao carregar
+        document.addEventListener('DOMContentLoaded', renderCart);
     </script>
-    <script src="script.js"></script>
 </body>
 </html>

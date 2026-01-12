@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Camiseta Oversize Gold Edition | Managold</title>
+    <title>Produto | Managold Performance</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
@@ -20,103 +20,205 @@
             }
         }
     </script>
-    <link rel="stylesheet" href="style.css">
     <style>
-        .active-size { border-color: #f59e0b !important; color: #f59e0b !important; background: rgba(245, 158, 11, 0.1); }
-        .active-color { border-color: white !important; transform: scale(1.1); }
+        body { background-color: #000; color: white; font-family: 'Inter', sans-serif; cursor: none !important; }
+        .glass-header { background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+        
+        /* Otimização de Cursor e Transições */
+        .active-size { border-color: #f59e0b !important; color: #f59e0b !important; background: rgba(245, 158, 11, 0.1); transform: translateY(-3px); }
+        #main-product-img { transition: opacity 0.3s ease-in-out, transform 0.7s cubic-bezier(0.23, 1, 0.32, 1); }
+
+        .btn-cyber {
+            position: relative; display: inline-block; padding: 1.2rem 3rem; background: #f59e0b; color: black; font-weight: 900;
+            text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.75rem;
+            clip-path: polygon(90% 0, 100% 34%, 100% 100%, 10% 100%, 0 66%, 0 0);
+            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1); text-align: center;
+        }
+        .btn-cyber:hover { background: white; transform: translateY(-2px); box-shadow: 0 0 20px rgba(245, 158, 11, 0.3); }
+
+        #custom-cursor { transition: transform 0.1s ease-out; pointer-events: none; will-change: transform; }
+        #cursor-dot { pointer-events: none; }
     </style>
 </head>
-<body class="bg-black text-white font-['Inter'] overflow-x-hidden">
+<body class="bg-black text-white overflow-x-hidden">
 
-    <div id="cursor-dot"></div>
-    <div id="cursor-circle"></div>
-
-    <div class="fixed inset-0 -z-10 pointer-events-none">
-        <div class="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-gold-600/10 blur-[120px] rounded-full animate-pulse"></div>
-        <div class="absolute bottom-[10%] right-[0%] w-[400px] h-[400px] bg-gold-900/10 blur-[100px] rounded-full"></div>
-    </div>
+    <div id="custom-cursor" class="fixed w-8 h-8 border border-gold-500 rounded-full z-[999] hidden md:block -translate-x-1/2 -translate-y-1/2"></div>
+    <div id="cursor-dot" class="fixed w-1 h-1 bg-gold-500 rounded-full z-[999] hidden md:block -translate-x-1/2 -translate-y-1/2"></div>
 
     <header class="glass-header sticky top-0 z-50">
         <div class="bg-gold-600 py-1.5 text-center text-[9px] font-black tracking-[0.3em] text-black uppercase">
-            Protocolo de Performance Humana v2.0 • Status: Ativo
+            Performance Humana de Elite • Protocolo v2.0
         </div>
         <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
             <a href="index.html" class="text-3xl font-black tracking-tighter">
                 <span class="text-white">MANA</span><span class="text-gold-500 italic">GOLD</span>
             </a>
-            <div class="hidden md:flex space-x-10">
-                <a href="index.html" class="text-[10px] font-bold tracking-[0.2em] hover:text-gold-500 transition-colors uppercase">Home</a>
-                <a href="index.html#shop" class="text-[10px] font-bold tracking-[0.2em] hover:text-gold-500 transition-colors uppercase">Coleções</a>
-            </div>
             <div class="flex items-center space-x-6">
-                <a href="carrinho.html" class="relative group">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" /></svg>
-                    <span id="cart-count-badge" class="absolute -top-2 -right-2 bg-gold-600 text-black text-[9px] font-bold h-4 w-4 flex items-center justify-center rounded-full">0</span>
+                <a href="index.html" class="text-[9px] font-bold tracking-widest uppercase hover:text-gold-500 transition-colors">Voltar ao Shop</a>
+                <a href="carrinho.html" class="relative group p-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                    </svg>
+                    <span id="cart-count-badge" class="absolute top-0 right-0 bg-gold-600 text-black text-[9px] font-bold h-4 w-4 flex items-center justify-center rounded-full">0</span>
                 </a>
-                <button id="mobile-menu-btn" class="md:hidden text-white"><svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M4 6h16M4 12h16m-7 6h7" stroke-width="2"/></svg></button>
             </div>
         </nav>
     </header>
 
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-32">
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 min-h-[80vh] flex items-center">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 w-full">
             
-            <div class="space-y-4" data-aos="fade-right">
-                <div class="product-card-container aspect-[3/4] overflow-hidden bg-zinc-900 border border-white/5">
-                    <img id="main-product-img" src="https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=1974" 
-                         alt="Camiseta Managold" class="w-full h-full object-cover transition-all duration-700">
+            <div class="space-y-6" data-aos="fade-right">
+                <div class="aspect-[3/4] overflow-hidden bg-zinc-950 border border-white/5 relative group">
+                    <img id="main-product-img" src="" alt="Produto Managold" class="w-full h-full object-cover">
                 </div>
+
+                <div id="thumb-grid" class="grid grid-cols-4 gap-4">
+                    </div>
             </div>
 
             <div class="flex flex-col justify-center" data-aos="fade-left">
-                <span class="text-gold-500 font-black tracking-[0.4em] text-[10px] uppercase mb-4 italic">// Protocolo: Oversize_Heavy</span>
-                <h1 id="product-name" class="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-6 leading-none">Camiseta Boxy <br> Gold Edition</h1>
+                <p id="prod-tag" class="text-gold-500 font-black tracking-[0.5em] text-[10px] uppercase mb-4 italic"></p>
+                <h1 id="prod-name" class="text-5xl md:text-7xl font-black uppercase tracking-tighter mb-4 leading-none"></h1>
                 
-                <div class="flex items-center gap-6 mb-8">
-                    <span class="text-3xl font-mono text-white italic font-black text-gold-500">R$ 149,90</span>
-                    <span class="text-zinc-600 line-through text-sm font-bold uppercase tracking-widest">MSRP: R$ 189,90</span>
+                <div class="flex items-center gap-6 mb-10">
+                    <span id="prod-price" class="text-4xl font-mono text-white italic font-black text-gold-500"></span>
+                    <span id="prod-msrp" class="text-zinc-600 line-through text-sm font-bold tracking-widest uppercase opacity-50"></span>
                 </div>
 
-                <div class="bg-white/5 p-6 border-l-2 border-gold-500 mb-8">
-                    <p class="text-zinc-400 text-sm leading-relaxed uppercase tracking-tighter">
-                        Arquitetada com algodão 30.1 de gramatura industrial. O corte Boxy V2.0 proporciona o caimento geométrico perfeito.
-                    </p>
-                </div>
-
-                <div class="mb-6">
-                    <p class="text-[10px] font-black uppercase tracking-widest text-zinc-500 mb-3">Selecionar Cor</p>
-                    <div class="flex gap-3">
-                        <button onclick="selectColor(this, 'Dourado')" class="w-8 h-8 rounded-full border-2 border-gold-500 bg-gold-500 color-option active-color"></button>
-                        <button onclick="selectColor(this, 'Preto')" class="w-8 h-8 rounded-full border-2 border-zinc-800 bg-black color-option"></button>
+                <div class="grid grid-cols-2 gap-4 mb-10 text-[9px] font-bold uppercase tracking-widest">
+                    <div class="flex items-center gap-3 text-zinc-400 border border-white/5 p-4 italic">
+                        <span class="w-1.5 h-1.5 bg-gold-500"></span> Algodão 30.1 Industrial
+                    </div>
+                    <div class="flex items-center gap-3 text-zinc-400 border border-white/5 p-4 italic">
+                        <span class="w-1.5 h-1.5 bg-gold-500"></span> Corte Geométrico Boxy
                     </div>
                 </div>
 
-                <div class="mb-10">
-                    <div class="flex justify-between mb-4 text-[10px] font-black uppercase tracking-[0.2em] text-zinc-500">
-                        <span>Módulo de Tamanho</span>
-                        <a href="#" class="text-gold-500 underline">Guia_Medidas.exe</a>
-                    </div>
+                <div class="mb-8">
+                    <p class="text-[10px] font-black uppercase tracking-widest text-zinc-500 mb-4">Módulo de Tamanho</p>
                     <div class="flex gap-4">
-                        <button onclick="selectSize(this, 'P')" class="size-btn w-14 h-14 border border-white/10 flex items-center justify-center font-black transition-all uppercase text-xs">P</button>
-                        <button onclick="selectSize(this, 'M')" class="size-btn w-14 h-14 border border-white/10 flex items-center justify-center font-black transition-all uppercase text-xs">M</button>
-                        <button onclick="selectSize(this, 'G')" class="size-btn w-14 h-14 border border-white/10 flex items-center justify-center font-black transition-all uppercase text-xs">G</button>
-                        <button onclick="selectSize(this, 'GG')" class="size-btn w-14 h-14 border border-white/10 flex items-center justify-center font-black transition-all uppercase text-xs">GG</button>
+                        <button onclick="selectSize(this, 'P')" class="size-btn w-14 h-14 border border-white/10 flex items-center justify-center font-black transition-all text-xs hover:border-gold-500">P</button>
+                        <button onclick="selectSize(this, 'M')" class="size-btn w-14 h-14 border border-white/10 flex items-center justify-center font-black transition-all text-xs hover:border-gold-500">M</button>
+                        <button onclick="selectSize(this, 'G')" class="size-btn w-14 h-14 border border-white/10 flex items-center justify-center font-black transition-all text-xs hover:border-gold-500">G</button>
+                        <button onclick="selectSize(this, 'GG')" class="size-btn w-14 h-14 border border-white/10 flex items-center justify-center font-black transition-all text-xs hover:border-gold-500">GG</button>
                     </div>
                 </div>
 
                 <div class="space-y-4">
-                    <button onclick="handleAddToCart()" class="w-full btn-cyber">Adicionar à Sacola</button>
-                    <button onclick="window.location.href='carrinho.html'" class="w-full border border-white/10 hover:bg-white/5 text-white font-black py-4 uppercase text-[10px] tracking-[0.3em] transition-all">Finalizar Agora</button>
+                    <button id="add-btn" onclick="addToCartLocal()" class="w-full btn-cyber">Adicionar à Sacola</button>
+                    <a href="carrinho.html" class="w-full border border-white/10 hover:bg-white/5 text-white font-black py-4 uppercase text-[10px] tracking-[0.3em] transition-all text-center block">Checkout Rápido</a>
                 </div>
             </div>
         </div>
     </main>
 
-    <footer class="bg-black border-t border-white/5 py-10 text-center">
-        <p class="text-[9px] text-zinc-600 tracking-[0.4em] uppercase">© 2026 Managold • Protocol Performance</p>
-    </footer>
-
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="script.js"></script>
+    <script>
+        // 1. BANCO DE DADOS DINÂMICO (Deve refletir os produtos da index.html)
+        const CATALOG = {
+            "101": { name: "SennaeLobo", price: "250,90", tag: "Oversize", msrp: "R$ 300,00", images: ["assets/scarface.jpeg", "assets/arvore.jpeg", "assets/pretaevinho.jpeg"] },
+            "102": { name: "Tech-Poly Tank", price: "300,90", tag: "Performance", msrp: "R$ 249,90", images: ["assets/duoo.jpeg", "assets/duoo.jpeg"] },
+            "103": { name: "Tricadoamor 3-em-2", price: "300,90", tag: "Techwear", msrp: "R$ 249,90", images: ["assets/trinca.jpeg", "assets/trinca.jpeg"] },
+            "104": { name: "VinhoSenna", price: "149,90", tag: "Oversize", msrp: "R$ 139,90", images: ["assets/pretaevinho.jpeg", "assets/pretaevinho.jpeg"] }
+        };
+
+        // 2. LÓGICA DE CARREGAMENTO DINÂMICO
+        const params = new URLSearchParams(window.location.search);
+        const prodId = params.get('id') || "101"; // Se não houver ID na URL, carrega o 101 por padrão
+        const product = CATALOG[prodId];
+
+        if (product) {
+            document.getElementById('prod-name').innerText = product.name;
+            document.getElementById('prod-price').innerText = "R$ " + product.price;
+            document.getElementById('prod-msrp').innerText = "MSRP: " + product.msrp;
+            document.getElementById('prod-tag').innerText = "// Mod_" + product.tag;
+            document.getElementById('main-product-img').src = product.images[0];
+
+            // Renderiza Miniaturas
+            const thumbGrid = document.getElementById('thumb-grid');
+            thumbGrid.innerHTML = product.images.map((img, idx) => `
+                <button onclick="changeImg(this)" class="thumb-btn aspect-square border ${idx === 0 ? 'border-gold-500 opacity-100' : 'border-white/10 opacity-50'} transition-all overflow-hidden bg-zinc-900">
+                    <img src="${img}" class="w-full h-full object-cover">
+                </button>
+            `).join('');
+        }
+
+        // 3. UI: CURSOR
+        const cursor = document.getElementById('custom-cursor');
+        const dot = document.getElementById('cursor-dot');
+        document.addEventListener('mousemove', (e) => {
+            const { clientX: x, clientY: y } = e;
+            window.requestAnimationFrame(() => {
+                cursor.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`;
+                dot.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`;
+            });
+        });
+
+        // 4. UI: GALERIA
+        function changeImg(btn) {
+            const mainImg = document.getElementById('main-product-img');
+            const newSrc = btn.querySelector('img').src;
+            
+            mainImg.style.opacity = '0';
+            setTimeout(() => {
+                mainImg.src = newSrc;
+                mainImg.style.opacity = '1';
+            }, 150);
+
+            document.querySelectorAll('.thumb-btn').forEach(b => {
+                b.classList.remove('border-gold-500', 'opacity-100');
+                b.classList.add('border-white/10', 'opacity-50');
+            });
+            btn.classList.add('border-gold-500', 'opacity-100');
+            btn.classList.remove('border-white/10', 'opacity-50');
+        }
+
+        // 5. LÓGICA DE COMPRA
+        let selectedSize = null;
+        function selectSize(btn, size) {
+            document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active-size'));
+            btn.classList.add('active-size');
+            selectedSize = size;
+        }
+
+        function addToCartLocal() {
+            if (!selectedSize) return alert("Selecione o tamanho técnico antes de prosseguir.");
+
+            const item = {
+                id: prodId,
+                name: product.name,
+                price: product.price,
+                img: product.images[0],
+                size: selectedSize,
+                tag: product.tag
+            };
+
+            let cart = JSON.parse(localStorage.getItem('managold_cart')) || [];
+            cart.push(item);
+            localStorage.setItem('managold_cart', JSON.stringify(cart));
+
+            // Feedback
+            const btn = document.getElementById('add-btn');
+            btn.innerText = "Sincronizado!";
+            btn.style.background = "white";
+            setTimeout(() => {
+                btn.innerText = "Adicionar à Sacola";
+                btn.style.background = "#f59e0b";
+            }, 1500);
+
+            updateBadge();
+        }
+
+        function updateBadge() {
+            const cart = JSON.parse(localStorage.getItem('managold_cart')) || [];
+            document.getElementById('cart-count-badge').innerText = cart.length;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            AOS.init({ duration: 1000, once: true });
+            updateBadge();
+        });
+    </script>
 </body>
 </html>
